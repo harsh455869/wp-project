@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <nav>
+      <div>
+        <img
+          class="logo"
+          src="http://www.gecg28.ac.in/img/GECG_logo.png"
+          alt="logo"
+        />
+      </div>
+      <div>
+        <h4 class="heading">GOVERNMENT ENGINEERING COLLEGE, GANDHINAGAR</h4>
+      </div>
+      <div class="buttons">
+        <button onclick="" class="loginBtn"><a href="/components/login.html">Login</a></button>
+        <button class="loginBtn"><a href="/components/studentReg.html">Register</a></button>
+      </div>
+    </nav>
+    <div class="slider">
+      <img
+        id="img1"
+        src="http://www.gecg28.ac.in/img/home/gecgh2.jpg"
+        width="100%"
+      
+        alt=""
+        srcset=""
+      />
+      <img
+        id="img2"
+     
+        src="http://www.gecg28.ac.in/img/home/gecgh3.jpg"
+        width="100%"
+        alt=""
+        srcset=""
+      />
+      <!-- <img src="" alt="" srcset=""> -->
+      <!-- <img src="" alt="" srcset=""> -->
+
+      <div class="arrows">
+        <div class="left">
+          <p onclick="prev()">＜</p>
+        </div>
+        <div class="right">
+          <p onclick="next()">＞</p>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    let a = document.getElementById("img1");
+    let b = document.getElementById("img2");
+    function next() {
+      a.style.display = "none";
+    }
+    function prev() {
+      a.style.display = "block";
+    }
+  </script>
+</html>
