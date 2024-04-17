@@ -43,7 +43,7 @@
       border-radius: 5px;
       background-color: #f2f2f2;
       padding:20px ;
-     width: 700px;
+     width: 80%;
      display: flex;
      justify-content: center;
     
@@ -74,16 +74,27 @@
     
     /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
     @media screen and (max-width: 600px) {
-      .col-25, .col-75, input[type=submit] {
-        width: 100%;
+      .container {
+        width: 70vw;
+        align-items: center;
+        justify-content: center;
+      }
+      .col-25, .col-75, input[type=submit],input[type=text] {
+      
         margin-top: 0;
       }
     }
+    /* @media screen and (max-width: 500px) {
+      .col-25, .col-75, input[type=submit],input[type=text] {
+      width:70%;
+        margin-top: 0;
+      }
+    } */
     </style>
 <body style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
   <h1>Login</h1>
     <div class="container">
-    <form action="/action_page.php">
+    <form action="../php/login.php" method="post">
       
         <div class="row">
           <div class="col-25">
@@ -101,7 +112,18 @@
             <input minlength=8 type="password" id="password" name="password" placeholder="Enter Password...">
           </div>
         </div>
-       
+        <div class="row">
+          <div class="col-25">
+            <label for="class">Role</label>
+          </div>
+          <div class="col-75">
+            <select id="class" name="role">
+              <option value="student">Student</option>
+              <option value="faculty">Faculty</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+        </div>
      
         <div class="row" style="margin-top: 30px;">
           <input type="submit" value="Submit">
