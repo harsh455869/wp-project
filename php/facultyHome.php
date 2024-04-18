@@ -1,3 +1,6 @@
+
+<?php include_once 'show_profile_faculty.php'?>
+<?php include_once 'show_notice.php';?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -219,26 +222,45 @@
     <div style="display: flex; align-items: center">
       <div id="notice" class="container item">
         <h2>Upload College Notice</h2>
-        <div class="uploadNotice header">
-          <input type="file" name="notice" id="notice" />
-          <input type="text" placeholder="Title of Document" />
+        <!-- <div class="uploadNotice header"> -->
+          <form action="../php/upload_notice.php" method="post" class="uploadNotice header">
+          <input type="file" name="file_url" id="notice" />
+          <input type="text" name="title" placeholder="Title of Document" />
           <input type="submit" value="Upload" />
-        </div>
+  </form>
+        <!-- </div> -->
         <div class="uploadedNotice">
             <h2 style="text-align: center;">Uploaded documents</h2>
+
           <table border="0.5" style="width: 100%;background-color: white;padding: 10px;margin-top: 10px">
             <tr>
               <th colspan="10" style="padding-top: 5px; padding-bottom: 20px;">Uploaded Notices</th>
               <th colspan="2">Status</th>
             </tr>
-            <tr">
-              <td colspan="10">MRP added Notice</td>
-              <td colspan="2" style="display: flex; align-items: center; justify-content: center;">
-                <button class="dltBtn">
-                delete
-              </button>
-            </td>
-            </tr>
+            <?php
+            if ($notice->num_rows > 0) {
+    // Output data of each row
+    while($row = $notice->fetch_assoc()) {
+        echo '<tr>';
+        echo '<td colspan="10">'.$row['title'].'</td>';
+        echo '<td colspan="2" style="display: flex; align-items: center; justify-content: center;">';
+        echo '<button class="dltBtn">';
+        echo 'delete';
+        echo '</button>';
+        echo '</td>';
+        echo '</tr>';
+    }
+} else {
+    echo "No notices found";
+}?>
+            
+             
+             
+                
+                
+             
+           
+           
           </table>
         </div>
         <!-- <div class="card">
@@ -350,96 +372,37 @@
           "
         >
           <h1>Faculty Profile</h1>
-          <div class="profileContainer" >
-            <form action="/components/studentHome.html">
-              <div class="row">
-                <div class="col-25">
-                  <label for="fname">Full Name</label>
-                </div>
-                <div class="col-75">
-                  <input
-               
-                    type="text"
-                    id="fname"
-                    name="firstname"
-                    value="Harsh Patel"
-                    placeholder="Your name.."
-                 disabled />
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-25">
-                  <label for="email">Email</label>
-                </div>
-                <div class="col-75">
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value="abc@gmail.com"
-                    placeholder="Your email.."
-                    disabled/>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-25">
-                  <label for="password">Password</label>
-                </div>
-                <div class="col-75">
-                  <input
-                    minlength="8"
-                    type="password"
-                    id="password"
-                    name="password"
-                    value="........."
-                    placeholder="Enter Password..."
-                    disabled/>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-25">
-                  <label for="branch">Branch</label>
-                </div>
-                <div class="col-75">
-                  <select id="branch" name="branch" disabled>
-                    <option value="CE">CE</option>
-                    <option value="IT">IT</option>
-                    <option value="EC">EC</option>
-                  </select>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-25">
-                  <label for="class">Class</label>
-                </div>
-                <div class="col-75">
-                  <select id="class" name="class" disabled>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                  </select>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-25">
-                  <label for="role">Batch</label>
-                </div>
-                <div class="col-75">
-                  <select id="batch" name="batch" disabled>
-                    <option value="A1">A1</option>
-                    <option value="A2">A2</option>
-                    <option value="A3">A3</option>
-                    <option value="B1">B1</option>
-                    <option value="B2">B2</option>
-                    <option value="B3">B3</option>
-                  </select>
-                </div>
-              </div>
+          <?php
+            
 
-              <!-- <div class="row" style="margin-top: 30px">
-                <input type="submit" value="Save" />
-              </div> -->
-            </form>
-          </div>
+            if ($result->num_rows > 0) {
+              $student = $result->fetch_assoc();
+              // Display student profile form for editing
+              echo "<div class='profileContainer'>";
+              // echo "<h2>Edit Student Profile</h2>";
+              echo "<form action='update_student_profile.php' method='post'>";
+
+              echo "<input type='hidden' name='email' value='" . $email . "'>";
+              echo "<label for='full_name'>Full Name:</label>";
+              echo "<input type='text' id='full_name' name='full_name' value='" . $student['fullName'] . "' disabled><br>";
+              echo "<label for='email'>Email:</label>";
+              echo "<input type='text' id='full_name' name='full_name' value='" . $student['email'] . "' disabled><br>";
+              echo "<label for='password'>Password:</label>";
+              echo "<input type='password' id='password' name='password' value='" . $student['password'] . "' disabled><br>";
+              echo "<label for='branch'>Branch:</label>";
+              echo "<input type='text' id='branch' name='branch' value='" . $student['branch'] . "' disabled><br>";
+              echo "<label for='class'>Class:</label>";
+              echo "<input type='text' id='class' name='class' value='" . $student['class'] . "' disabled><br>";
+              echo "<label for='batch'>Batch:</label>";
+              echo "<input type='text' id='batch' name='batch' value='" . $student['batch'] . "' disabled><br>";
+              // echo "<input type='submit' value='Update Profile'>";
+              echo "</form>";
+              echo "</div>";
+          } else {
+              // If student profile not found
+              echo "faculty profile not found for the provided email.";
+          }
+?>
         </div>
       </div>
     </div>

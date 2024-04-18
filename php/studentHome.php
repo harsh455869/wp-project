@@ -2,6 +2,7 @@
 <?php include_once 'show_notice.php';?>
 <?php include_once 'show_assignment.php';?>
 <?php include_once 'show_timetable.php';?>
+<?php include_once 'show_department.php';?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -218,10 +219,21 @@
           </div>
           <div id="notice" style="display: none;" class="container item" >
             <h2>Department Notices</h2>
-            <div class="card">
+            <?php
+            if ($department->num_rows > 0) {
+    // Output data of each row
+    while($row = $department->fetch_assoc()) {
+        echo '<div class="card">';
+        echo '   <p>'.$row['title'].'</p>';
+        echo ' </div>';
+    }
+} else {
+    echo "No notices found";
+}?>
+            <!-- <div class="card">
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam quasi consequuntur eum nobis aperiam non quibusdam nam temporibus qui, exercitationem a corporis ipsam enim, odio voluptates neque! Rem, quidem labore!</p>
                 <span style="float: right;">16-04-2024 16:31</span>
-            </div>
+            </div> -->
           </div>
           <div id="notice" style="display: none;" class="container item" >
             <h2>Assignment</h2>
@@ -245,7 +257,7 @@
           <div id="notice" style="display: none;width: 100%;" class="container item" >
 
             <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; width: 70%;">
-              <h1>Student Registration Form</h1>
+              <h1>Student Profile</h1>
 
               
 

@@ -60,7 +60,7 @@ if ($result->num_rows == 1) {
     // $_SESSION['branch'] = $student['branch'];
     // $_SESSION['batch'] = $student['batch'];
     // $_SESSION['class'] = $student['class'];
-    $_SESSION['role'] = $role;
+    // $_SESSION['role'] = $role;
     
     // Redirect based on user role
     switch ($role) {

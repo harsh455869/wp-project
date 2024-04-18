@@ -52,7 +52,10 @@ if (strpos($email, '@gecg28.ac.in') === false) {
 $sql = "INSERT INTO student (fullName, email, password, class, batch, branch) VALUES ('$fullName', '$email', '$password1', '$class', '$batch', '$branch')";
 
 if ($conn->query($sql) === TRUE) {
-    header('Location:../components/studentHome.php')
+    session_start();
+    $_SESSION['email'] = $email;
+    $_SESSION['role'] = "student";
+    header("Location: ./studentHome.php");
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

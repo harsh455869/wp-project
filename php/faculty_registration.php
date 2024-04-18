@@ -29,9 +29,16 @@ function sanitize_input($data) {
 $fullName = sanitize_input($_POST['fullName']);
 $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
 $password1 = sanitize_input($_POST['password']);
+$branch = sanitize_input($_POST['branch']);
 $class = sanitize_input($_POST['class']);
 $batch = sanitize_input($_POST['batch']);
-$branch = sanitize_input($_POST['branch']);
+
+// $fullName = $_POST['fullName'];
+// $email = $_POST['email'];
+// $password1 = $_POST['password'];
+// $branch = $_POST['branch'];
+// $class = $_POST['class'];
+// $batch = $_POST['batch'];
 
 // Basic validation
 if (empty($fullName) || empty($email) || empty($password1) || empty($class) || empty($batch) || empty($branch)) {
@@ -52,7 +59,10 @@ if (strpos($email, '@gecg28.ac.in') === false) {
 $sql = "INSERT INTO faculty (fullName, email, password, class, batch, branch) VALUES ('$fullName', '$email', '$password1', '$class', '$batch', '$branch')";
 
 if ($conn->query($sql) === TRUE) {
-    header('Location:./facultyHome.php')
+    session_start();    
+    $_SESSION['email'] = $email;
+    $_SESSION['role'] = "faculty";
+    header("Location: ./facultyHome.php");
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
