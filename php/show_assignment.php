@@ -21,12 +21,12 @@ session_start();
 
 
 // Retrieve email from session
-// $email = $_SESSION['email'];
-// $batch=$_SESSION['batch'];
-// $branch=$_SESSION['branch']
+$email = $_SESSION['email'];
+$batch=$_SESSION['batch'];
+$branch=$_SESSION['branch'];
 
 // Fetch student profile from the database based on email
-$query = "SELECT * FROM assignment";
+$query = "SELECT * FROM assignment WHERE batch='$batch' AND branch='$branch'";
 $ass = $conn->query($query);
 // $ass = $result->fetch_assoc();
 // $student=''

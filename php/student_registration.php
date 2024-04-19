@@ -54,6 +54,10 @@ $sql = "INSERT INTO student (fullName, email, password, class, batch, branch) VA
 if ($conn->query($sql) === TRUE) {
     session_start();
     $_SESSION['email'] = $email;
+    $_SESSION['fullName'] = $fullName;
+    $_SESSION['branch'] = $branch;
+    $_SESSION['class'] = $class;
+    $_SESSION['batch'] = $batch;
     $_SESSION['role'] = "student";
     header("Location: ./studentHome.php");
 } else {

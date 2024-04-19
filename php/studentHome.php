@@ -151,7 +151,7 @@
           <h4 class="heading">GOVERNMENT ENGINEERING COLLEGE, GANDHINAGAR</h4>
         </div>
         <div >
-          <button onclick="" class="loginBtn"><a href="/index.html">Logout</a></button>
+          <button onclick="" class="loginBtn"><a href="../index.html">Logout</a></button>
         </div>
       </nav>
 <div class="container header">
@@ -217,6 +217,7 @@
               /> -->
             </div>
           </div>
+         
           <div id="notice" style="display: none;" class="container item" >
             <h2>Department Notices</h2>
             <?php
@@ -269,22 +270,47 @@
                 // Display student profile form for editing
                 echo "<div class='profileContainer'>";
                 // echo "<h2>Edit Student Profile</h2>";
-                echo "<form action='update_student_profile.php' method='post'>";
+                echo "<form action='./update_profile.php' method='post'>";
 
-                echo "<input type='hidden' name='email' value='" . $email . "'>";
+                echo "<input type='hidden' name='studentId' value='" . $student['studentId'] . "'>";
                 echo "<label for='full_name'>Full Name:</label>";
-                echo "<input type='text' id='full_name' name='full_name' value='" . $student['fullName'] . "'><br>";
+                echo "<input type='text' id='full_name' name='fullName' value='" . $student['fullName'] . "'><br>";
                 echo "<label for='email'>Email:</label>";
-                echo "<input type='text' id='full_name' name='full_name' value='" . $student['email'] . "'><br>";
+                echo "<input type='text' id='full_name' name='email' value='" . $student['email'] . "'><br>";
                 echo "<label for='password'>Password:</label>";
                 echo "<input type='password' id='password' name='password' value='" . $student['password'] . "'><br>";
-                echo "<label for='branch'>Branch:</label>";
-                echo "<input type='text' id='branch' name='branch' value='" . $student['branch'] . "'><br>";
-                echo "<label for='class'>Class:</label>";
-                echo "<input type='text' id='class' name='class' value='" . $student['class'] . "'><br>";
-                echo "<label for='batch'>Batch:</label>";
-                echo "<input type='text' id='batch' name='batch' value='" . $student['batch'] . "'><br>";
-                echo "<input type='submit' value='Update Profile'>";
+                echo '<div class="row">';
+                echo '<div class="col-25">';
+                echo '<label for="branch">Branch</label>';
+                echo '</div>';
+                echo '<div class="col-75">';
+                echo '<select id="branch" name="branch" >';
+                echo '<option value="CE">CE</option>';
+                echo '<option value="IT">IT</option>';
+                echo '<option value="EC">EC</option>';
+                echo '</select>';
+                echo '</div>';
+                echo '</div>';
+                echo "<label for='class'>Class:</label><br>";
+                echo '<div style="float: left;width: 100%;margin-top: 6px;"><br>';
+                echo '<select id="class" name="class">';
+                echo '<option value="A">A</option>';
+                echo '<option value="B">B</option>';
+                echo '</select>';
+                echo '</div>';
+                echo '<div style="float: left;width: 100%;margin-top: 6px;"><br>';
+                echo "<label for='batch'>Batch:</label><br>";
+                echo '<select id="batch" name="batch">';
+                echo '<option value="A1">A1</option>';
+                echo '<option value="A2">A2</option>';
+                echo '<option value="A3">A3</option>';
+                echo '<option value="B1">B1</option>';
+                echo '<option value="B2">B2</option>';
+                echo '<option value="B3">B3</option>';
+                echo '</select>';
+                echo '</div>';
+                      
+                echo "<input type='submit' value='Update Profile' style='margin-top: 30px;'>";
                 echo "</form>";
                 echo "</div>";
             } else {
@@ -359,7 +385,7 @@
                       </div>
                     </div>
                  
-                    <div class="row" style="margin-top: 30px;">
+                    <div class="row" >
                       <input type="submit" value="Save">
                     </div>
                    

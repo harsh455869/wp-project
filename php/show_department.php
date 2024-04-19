@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 }
 
 // Start or resume session
-// session_start();
+session_start();
 
 // Check if email is stored in session
 
@@ -23,10 +23,10 @@ if ($conn->connect_error) {
 // Retrieve email from session
 // $email = $_SESSION['email'];
 // $batch=$_SESSION['batch'];
-// $branch=$_SESSION['branch']
+$branch=$_SESSION['branch'];
 
 // Fetch student profile from the database based on email
-$query = "SELECT * FROM department_notice";
+$query = "SELECT * FROM department_notice WHERE branch='$branch'";
 $department = $conn->query($query);
 // $ass = $result->fetch_assoc();
 // $student=''

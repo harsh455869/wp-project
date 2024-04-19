@@ -22,11 +22,12 @@ if ($conn->connect_error) {
 
 // Retrieve email from session
 // $email = $_SESSION['email'];
-// $batch=$_SESSION['batch'];
-// $branch=$_SESSION['branch']
+$class=$_SESSION['class'];
+$branch=$_SESSION['branch'];
+
 
 // Fetch student profile from the database based on email
-$query = "SELECT * FROM timetable";
+$query = "SELECT * FROM timetable WHERE branch='$branch' AND class='$class'";
 $tt = $conn->query($query);
 // Check if there are any notices
 if ($tt->num_rows > 0) {

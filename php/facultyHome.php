@@ -1,6 +1,9 @@
 
 <?php include_once 'show_profile_faculty.php'?>
-<?php include_once 'show_notice.php';?>
+<?php include_once 'show_notice.php'?>
+<?php include_once 'show_department.php';?>
+<?php include_once 'show_timetable.php';?>
+<?php include_once 'show_assignment.php';?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -202,7 +205,7 @@
       </div>
       <div >
         <button onclick="" class="loginBtn">
-          <a href="/index.html">Logout</a>
+          <a href="../index.html">Logout</a>
         </button>
       </div>
     </nav>
@@ -244,9 +247,12 @@
         echo '<tr>';
         echo '<td colspan="10">'.$row['title'].'</td>';
         echo '<td colspan="2" style="display: flex; align-items: center; justify-content: center;">';
-        echo '<button class="dltBtn">';
+        echo '<form method="post" action="./delete_notice.php">';
+        echo "<input type='hidden' name='item_id' value='" . $row['noticeId'] . "'>";
+        echo '<button type="submit" class="dltBtn">';
         echo 'delete';
         echo '</button>';
+        echo '</form>';
         echo '</td>';
         echo '</tr>';
     }
@@ -270,16 +276,18 @@
       </div>
       <div id="notice" style="display: none;" class="container item">
         <h2>Upload Departnmental Notice</h2>
-        <div class="uploadNotice header">
-          <input type="file" name="notice" id="notice" />
-          <input type="text" placeholder="Title of Document" />
+        <form action="../php/upload_departmental_notice.php" method="post"   class="uploadNotice header">
+          
+          <input type="file" name="file_url" id="notice" />
+          <input type="text" name="title" placeholder="Title of Document" />
           <select id="branch" class="branch" name="branch">
             <option value="CE">CE</option>
             <option value="IT">IT</option>
             <option value="EC">EC</option>
           </select>
-          <input type="submit" value="Upload" />
-        </div>
+          <input type="submit" value="Upload"  />
+
+</form>
         <div class="uploadedNotice">
             <h2 style="text-align: center;">Uploaded documents</h2>
           <table border="0.5" style="width: 100%;background-color: white;padding: 10px;margin-top: 10px">
@@ -287,14 +295,30 @@
               <th colspan="10" style="padding-top: 5px; padding-bottom: 20px;">Uploaded Notices</th>
               <th colspan="2">Status</th>
             </tr>
-            <tr">
-              <td colspan="10">MRP added Notice</td>
-              <td colspan="2" style="display: flex; align-items: center; justify-content: center;">
-                <button class="dltBtn">
-                delete
-              </button>
-            </td>
-            </tr>
+            
+          <?php
+            if ($department->num_rows > 0) {
+              // Output data of each row
+              while($row = $department->fetch_assoc()) {
+          echo '<tr>';
+          echo '<td colspan="10">'.$row['title'].'</td>';
+          echo '<td colspan="2" style="display: flex; align-items: center; justify-content: center;">'; 
+          echo '<form method="post" action="./delete_department_notice.php">';
+        echo "<input type='hidden' name='item_id' value='" . $row['noticeId'] . "'>";
+        echo '<button type="submit" class="dltBtn">';
+        echo 'delete';
+        echo '</button>';
+        echo '</form>';
+          echo '</td>';
+          echo '</tr>';
+              }
+            } else {
+              echo "No notices found";
+          }
+           
+            
+            
+            ?>
           </table>
         </div>
         <!-- <div class="card">
@@ -304,9 +328,9 @@
       </div>
       <div id="time" style="display: none;" class="container item">
         <h2>Time table</h2>
-        <div class="uploadNotice header">
-          <input type="file" name="notice" id="notice" />
-          <input type="text" placeholder="Title of Document" />
+        <form action="../php/upload_timetable.php"  method="post" class="uploadNotice header">
+          <input type="file" name="file_url" id="notice" />
+          <input type="text" name="title" placeholder="Title of Document" />
           <select id="branch" class="branch" name="branch">
             <option value="CE">CE</option>
             <option value="IT">IT</option>
@@ -317,7 +341,7 @@
             <option value="B">B</option>
           </select>
           <input type="submit" value="Upload" />
-        </div>
+        </form>
         <div class="uploadedNotice">
             <h2 style="text-align: center;">Uploaded documents</h2>
           <table border="0.5" style="width: 100%;background-color: white;padding: 10px;margin-top: 10px">
@@ -325,22 +349,41 @@
               <th colspan="10" style="padding-top: 5px; padding-bottom: 20px;">Uploaded TimeTables</th>
               <th colspan="2">Status</th>
             </tr>
-            <tr">
-              <td colspan="10">CE_A</td>
-              <td colspan="2" style="display: flex; align-items: center; justify-content: center;">
-                <button class="dltBtn">
-                delete
-              </button>
-            </td>
-            </tr>
+            <?php
+            if ($tt->num_rows > 0) {
+              // Output data of each row
+              while($row = $tt->fetch_assoc()) {
+          echo '<tr>';
+          echo '<td colspan="10">';
+          echo '<a href="'.$row['file_url'].'">';
+          echo $row['title'];
+          echo '</a>';
+          echo '</td>';
+          echo '<td colspan="2" style="display: flex; align-items: center; justify-content: center;">'; 
+          echo '<form method="post" action="./delete_timetable.php">';
+        echo "<input type='hidden' name='item_id' value='" . $row['timetableId'] . "'>";
+        echo '<button type="submit" class="dltBtn">';
+        echo 'delete';
+        echo '</button>';
+        echo '</form>'; 
+          echo '</td>';
+          echo '</tr>';
+              }
+            } else {
+              echo "No notices found";
+          }
+           
+            
+            
+            ?>
           </table>
         </div>
       </div>
       <div id="notice" style="display: none" class="container item">
         <h2>Assignment</h2>
-        <div class="uploadNotice header">
-          <input type="file" name="notice" id="notice" />
-          <input type="text" placeholder="Title of Document" />
+        <form method='post' action="../php/upload_assignment.php" class="uploadNotice header">
+          <input type="file" name="file_url" id="notice" />
+          <input type="text" name="title" placeholder="Title of Document" />
           <select id="branch" class="branch" name="branch">
             <option value="CE">CE</option>
             <option value="IT">IT</option>
@@ -355,10 +398,44 @@
             <option value="B3">B3</option>
           </select>
           <input type="submit" value="Upload" />
-        </div>
+        </form>
         <div class="card">
-          <a href="#">Assignment 1</a>
-          <span style="float: right">16-04-2024 16:31</span>
+        <h2 style="text-align: center;">Uploaded documents</h2>
+          <table border="0.5" style="width: 100%;background-color: white;padding: 10px;margin-top: 10px">
+            <tr>
+              <th colspan="10" style="padding-top: 5px; padding-bottom: 20px;">Uploaded Assignments</th>
+              <th colspan="2">Status</th>
+            </tr>
+        <?php
+            if ($ass->num_rows > 0) {
+              // Output data of each row
+              while($row = $ass->fetch_assoc()) {
+          echo '<tr>';
+          echo '<td colspan="10">';
+          echo '<a href="'.$row['file_url'].'">';
+          echo $row['title'];
+          echo '</a>';
+          echo '</td>';
+          echo '<td colspan="2" style="display: flex; align-items: center; justify-content: center;">'; 
+          echo '<form method="post" action="./delete_assignment.php">';
+          echo "<input type='hidden' name='item_id' value='" . $row['assignmentId'] . "'>";
+          echo '<button type="submit" class="dltBtn">';
+          echo 'delete';
+          echo '</button>';
+          echo '</form>';
+          echo '</td>';
+          echo '</tr>';
+              }
+            } else {
+              echo "No notices found";
+          }
+           
+            
+            
+            ?>
+            </table>
+          <!-- <a href="#">Assignment 1</a>
+          <span style="float: right">16-04-2024 16:31</span> -->
         </div>
       </div>
       <div id="notice" style="display: none;width: 100%;" class="container item">
@@ -380,7 +457,7 @@
               // Display student profile form for editing
               echo "<div class='profileContainer'>";
               // echo "<h2>Edit Student Profile</h2>";
-              echo "<form action='update_student_profile.php' method='post'>";
+              echo "<form>";
 
               echo "<input type='hidden' name='email' value='" . $email . "'>";
               echo "<label for='full_name'>Full Name:</label>";
@@ -408,6 +485,8 @@
     </div>
 
     <script>
+      
+      
       function onChange(index) {
         let classRef = document.getElementsByClassName("item");
         for (let i = 0; i < 5; i++) {

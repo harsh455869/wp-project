@@ -53,13 +53,13 @@ $result = $conn->query($sql);
 
 if ($result->num_rows == 1) {
     // User authentication successful
-    // $student = $result->fetch_assoc();
+    $student = $result->fetch_assoc();
     session_start();
     $_SESSION['email'] = $email;
     $_SESSION['role'] = $role;
-    // $_SESSION['branch'] = $student['branch'];
-    // $_SESSION['batch'] = $student['batch'];
-    // $_SESSION['class'] = $student['class'];
+    $_SESSION['branch'] = $student['branch'];
+    $_SESSION['batch'] = $student['batch'];
+    $_SESSION['class'] = $student['class'];
     // $_SESSION['role'] = $role;
     
     // Redirect based on user role
