@@ -285,28 +285,53 @@
                 echo '</div>';
                 echo '<div class="col-75">';
                 echo '<select id="branch" name="branch" >';
-                echo '<option value="CE">CE</option>';
-                echo '<option value="IT">IT</option>';
-                echo '<option value="EC">EC</option>';
+                $branches = array("CE","IT","EC");
+
+                // Output options
+                foreach ($branches as $option) {
+                    // Check if the current option's value matches the default value
+                    $selected = ($option == $student['branch']) ? 'selected="selected"' : '';
+                    echo '<option value="' . $option . '" ' . $selected . '>' . $option . '</option>';
+                }
+                // echo '<option value="CE">CE</option>';
+                // echo '<option value="IT">IT</option>';
+                // echo '<option value="EC">EC</option>';
                 echo '</select>';
                 echo '</div>';
                 echo '</div>';
                 echo "<label for='class'>Class:</label><br>";
                 echo '<div style="float: left;width: 100%;margin-top: 6px;"><br>';
                 echo '<select id="class" name="class">';
-                echo '<option value="A">A</option>';
-                echo '<option value="B">B</option>';
+                $classes = array("A","B");
+
+                // Output options
+                foreach ($classes as $option) {
+                    // Check if the current option's value matches the default value
+                    $selected = ($option == $student['class']) ? 'selected="selected"' : '';
+                    echo '<option value="' . $option . '" ' . $selected . '>' . $option . '</option>';
+                }
+            
+                // echo '<option value="A">A</option>';
+                // echo '<option value="B">B</option>';
                 echo '</select>';
                 echo '</div>';
                 echo '<div style="float: left;width: 100%;margin-top: 6px;"><br>';
                 echo "<label for='batch'>Batch:</label><br>";
                 echo '<select id="batch" name="batch">';
-                echo '<option value="A1">A1</option>';
-                echo '<option value="A2">A2</option>';
-                echo '<option value="A3">A3</option>';
-                echo '<option value="B1">B1</option>';
-                echo '<option value="B2">B2</option>';
-                echo '<option value="B3">B3</option>';
+                $batches = array("A1", "A2", "A3", "B1", "B2", "B3");
+
+                // Output options
+                foreach ($batches as $option) {
+                    // Check if the current option's value matches the default value
+                    $selected = ($option == $student['batch']) ? 'selected="selected"' : '';
+                    echo '<option value="' . $option . '" ' . $selected . '>' . $option . '</option>';
+                }
+                // echo '<option value="A1">A1</option>';
+                // echo '<option value="A2">A2</option>';
+                // echo '<option value="A3">A3</option>';
+                // echo '<option value="B1">B1</option>';
+                // echo '<option value="B2">B2</option>';
+                // echo '<option value="B3">B3</option>';
                 echo '</select>';
                 echo '</div>';
                       
